@@ -1180,17 +1180,75 @@
 					"item": [
 						{
 							"name": "Get all deals",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "f5e78dde-bd72-4144-a35b-6dbb7bd25337",
+										"exec": [
+											"pm.test(\"Status code is 400\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});",
+											"",
+											"pm.test(\"Response is an object with items property\", function () {",
+											"    pm.expect(pm.response.json()).to.be.an('object').that.has.property('items');",
+											"});",
+											"",
+											"pm.test(\"LinkedContactsIds array is present and contains expected number of elements\", function () {",
+											"    const responseData = pm.response.json();",
+											"    ",
+											"    pm.expect(responseData).to.be.an('object');",
+											"    pm.expect(responseData.items).to.be.an('array');",
+											"    ",
+											"    responseData.items.forEach(function(item) {",
+											"        pm.expect(item.linkedContactsIds).to.exist.and.to.be.an('array');",
+											"        pm.expect(item.linkedContactsIds).to.have.lengthOf(1); // Replace 1 with the expected number of elements",
+											"    });",
+											"});",
+											"",
+											"",
+											"pm.test(\"LinkedCompaniesIds array is present and contains the expected number of elements\", function () {",
+											"    const responseData = pm.response.json();",
+											"    ",
+											"    pm.expect(responseData).to.be.an('object');",
+											"    pm.expect(responseData.items).to.be.an('array');",
+											"    pm.expect(responseData.items[0].linkedCompaniesIds).to.exist.and.to.be.an('array');",
+											"    pm.expect(responseData.items[0].linkedCompaniesIds).to.have.lengthOf(1);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Message and code fields are non-empty strings\", function () {",
+											"    const responseData = pm.response.json();",
+											"    ",
+											"    pm.expect(responseData.message).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Message should not be empty\");",
+											"    pm.expect(responseData.code).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Code should not be empty\");",
+											"});",
+											"",
+											"",
+											"pm.test(\"Status code is 401\", function () {",
+											"    pm.expect(pm.response.code).to.equal(401);",
+											"});",
+											"",
+											"pm.test(\"Response has JSON content type\", function () {",
+											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+											"});",
+											"",
+											"pm.test(\"Response has items array\", function () {",
+											"    const responseData = pm.response.json();",
+											"    pm.expect(responseData.items).to.be.an('array');",
+											"});",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"id": "8b512d75-2fb6-49f7-8bfa-b135f341aff7",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
 							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": {
-										"token": "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"
-									}
-								},
 								"method": "GET",
 								"header": [
 									{
