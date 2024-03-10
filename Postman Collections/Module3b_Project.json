@@ -20406,6 +20406,36 @@
 					"item": [
 						{
 							"name": "Get all webhooks",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "f2b5f3e8-1ca9-4af8-a983-2de1c08853d2",
+										"exec": [
+											"pm.test(\"Response status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"pm.test(\"Response is an object with webhooks property\", function () {",
+											"    pm.expect(pm.response.json()).to.be.an('object').that.has.property('webhooks');",
+											"});",
+											"",
+											"pm.test(\"Each element in the webhooks array has required properties\", function () {",
+											"    pm.response.json().webhooks.forEach(function(webhook) {",
+											"        pm.expect(webhook).to.have.property('url');",
+											"        pm.expect(webhook).to.have.property('id');",
+											"        pm.expect(webhook).to.have.property('description');",
+											"        pm.expect(webhook).to.have.property('events');",
+											"        pm.expect(webhook).to.have.property('type');",
+											"        pm.expect(webhook).to.have.property('createdAt');",
+											"        pm.expect(webhook).to.have.property('modifiedAt');",
+											"    });",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"id": "f162fe7a-ca12-4580-8dc7-495a00fe6a70",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
@@ -20535,6 +20565,24 @@
 						},
 						{
 							"name": "Create a webhook",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "a1425cf9-abc4-4e50-a5e5-131030d23ce2",
+										"exec": [
+											"pm.test(\"Body matches string\", function () {",
+											"    pm.expect(pm.response.text()).to.include(\"string_you_want_to_search\");",
+											"});",
+											"pm.test(\"Your test name\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.value).to.eql(100);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"id": "5f4cd6d9-842f-48ac-b27e-b62dc3584e21",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
@@ -20646,6 +20694,20 @@
 						},
 						{
 							"name": "Get a webhook details",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "d2ed0612-2466-4845-ad50-148ddf839765",
+										"exec": [
+											"// Stores the webhookId in an environment or global variable",
+											"var webhookId = responseBody.id;",
+											"pm.globals.set(\"webhookId\", webhookId);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"id": "87605dde-e4e5-4b47-948b-f29f06dc12fe",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
@@ -20811,6 +20873,32 @@
 						},
 						{
 							"name": "Update a webhook",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "5a79db88-c0fd-4563-8de2-2a44fe937750",
+										"exec": [
+											"pm.test(\"Response status code is 401\", function () {",
+											"    pm.response.to.have.status(401);",
+											"});",
+											"",
+											"pm.test(\"Response is in JSON format\", function () {",
+											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+											"});",
+											"",
+											"pm.test(\"Response has message property\", function () {",
+											"    pm.expect(pm.response.json()).to.have.property(\"message\");",
+											"});",
+											"",
+											"pm.test(\"Response has code property\", function () {",
+											"    pm.expect(pm.response.json()).to.have.property(\"code\");",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"id": "26fba763-75a8-4f3d-a79a-a07d81445d85",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
