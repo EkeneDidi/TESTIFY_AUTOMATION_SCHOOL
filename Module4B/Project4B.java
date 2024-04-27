@@ -8,20 +8,29 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.concurrent.TimeUnit;
+
 
 public class Project4B {
-   WebDriver driver = null;
 
-    @BeforeMethod
+    WebDriver driver = null;
+
+
+    @BeforeClass
     public void openBrowser() {
+
         System.setProperty("webdriver.chrome.driver", "/Users/reliancehmo/IdeaProjects/Selenium/src/chromedriver");
-        //launch browser
-        WebDriver driver = new ChromeDriver();
-        //maximize browser
+
+        //Launch browser
+        driver = new ChromeDriver();
+
+        //To Maximize the browser
         driver.manage().window().maximize();
+
     }
 
     @Test
@@ -104,8 +113,8 @@ public class Project4B {
         // products section of the site to purchase  top of your choice from the women's section
         driver.findElement(By.xpath("//*[@id=\"header\"]/div/div/div/div[2]/div/ul/li[2]/a")).click();
         driver.findElement(By.xpath("//*[@id=\"accordian\"]/div[1]/div[1]/h4/a")).click();
-       driver.findElement(By.xpath("//*[@id=\"Women\"]/div/ul/li[2]/a")).click();
-       driver.findElement(By.xpath("/html/body/section/div/div[2]/div[2]/div/div[3]/div/div[1]/div[2]/div/a")).click();
+        driver.findElement(By.xpath("//*[@id=\"Women\"]/div/ul/li[2]/a")).click();
+        driver.findElement(By.xpath("/html/body/section/div/div[2]/div[2]/div/div[3]/div/div[1]/div[2]/div/a")).click();
 
 
         // Validating that the item was added successfully to cart
