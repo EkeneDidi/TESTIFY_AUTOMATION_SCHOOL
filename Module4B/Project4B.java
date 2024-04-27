@@ -97,7 +97,6 @@ public class Project4B {
         driver.findElement(By.xpath("//*[@id=\"form\"]/div/div/div/div/form/button")).click();
 
 
-
         //   Validating that account was created successfully
         WebElement successMessage = driver.findElement(By.xpath("//*[@id=\"form\"]/div/div/div/p[1]"));
         String actualMessage = successMessage.getText();
@@ -109,11 +108,10 @@ public class Project4B {
         driver.findElement(By.cssSelector("#form > div > div > div > div > a")).click();
 
 
-
         // products section of the site to purchase  top of your choice from the women's section
         driver.findElement(By.xpath("//*[@id=\"header\"]/div/div/div/div[2]/div/ul/li[2]/a")).click();
         driver.findElement(By.xpath("//*[@id=\"accordian\"]/div[1]/div[1]/h4/a")).click();
-        driver.findElement(By.xpath("//*[@id=\"Women\"]/div/ul/li[2]/a")).click();
+        driver.findElement(By.xpath("//*[@id=\"Women\"]/div/ul/li[2]")).click();
         driver.findElement(By.xpath("/html/body/section/div/div[2]/div[2]/div/div[3]/div/div[1]/div[2]/div/a")).click();
 
 
@@ -145,5 +143,76 @@ public class Project4B {
         driver.findElement(By.id("submit")).click();
 
         System.out.println("Congratulations! Your order has been confirmed!");
+
+    }
+
+    @Test
+    public void sectionB() throws InterruptedException {
+
+        /**
+         * -Without terminating the current window,
+         * launch another window and
+         * visit https://blazedemo.com/
+         * Select Boston and Rome as departure and arrival destinations.
+         * -Click on “Find Flights”
+         * Select a flight
+         * Copy the flight number and paste into the Zipcode field
+         * Fill all other fields with valid inputs
+         * Tick the‘RememberMe’checkbox and Purchase flight
+         */
+
+//        Launching the blazedemo app
+        driver.get("https://blazedemo.com/");
+
+//        Select the department location
+        WebElement departure = driver.findElement(By.cssSelector("select[name=fromPort]"));
+        Select select = new Select(departure);
+        select.selectByValue("Boston");
+
+//      Select the destination location and searching for flight
+        WebElement destination = driver.findElement(By.xpath("//body/div[3]/form[1]/select[2]"));
+        Select select1 = new Select(destination);
+        select1.selectByIndex(1);
+
+        driver.findElement(By.xpath("//body/div[3]/form[1]/div[1]/input[1]")).click();
+
+
+//        Select flight
+        driver.findElement(By.xpath("//tbody/tr[1]/td[1]/input[1]")).click();
+
+//        Copying the flight number for use in the zipcode fields
+        WebElement flight = driver.findElement(By.cssSelector("body:nth-child(2) div.container:nth-child(2) > p:nth-child(3)"));
+        String flightNum = flight.getText().substring(15, 20);
+
+//        Filling the flight form
+        driver.findElement(By.id("inputName")).sendKeys("Mary Onuorah");
+        driver.findElement(By.id("address")).sendKeys("1 Crescent, Lekki-Ajah");
+        driver.findElement(By.id("city")).sendKeys("Lekki");
+        driver.findElement(By.id("state")).sendKeys("Lagos");
+        driver.findElement(By.id("zipCode")).sendKeys(flightNum);
+
+        WebElement cardType = driver.findElement(By.id("cardType"));
+        Select select2 = new Select(cardType);
+        select2.selectByVisibleText("American Express");
+
+        driver.findElement(By.cssSelector("input[id=creditCardNumber]")).sendKeys("5061041750168625927");
+        driver.findElement(By.id("creditCardMonth")).sendKeys("12");
+        driver.findElement(By.id("creditCardYear")).sendKeys("2030");
+        driver.findElement(By.id("nameOnCard")).sendKeys("Mary Onuorah");
+
+        driver.findElement(By.id("rememberMe")).click();
+        driver.findElement(By.xpath("//body/div[2]/form[1]/div[11]/div[1]/input[1]")).click();
+        Thread.sleep(1000);
+
+//        Validating that the payment was completed successfully
+        WebElement successMessage = driver.findElement(By.cssSelector("body:nth-child(2) div.container:nth-child(2) div.container.hero-unit > h1:nth-child(1)"));
+        String actualMessage = successMessage.getText();
+        String expectedMessage = "Thank you for your purchase today!";
+
+        successMessage.isDisplayed();
+        Assert.assertEquals(expectedMessage, actualMessage);
+
+        driver.quit();
+
     }
 }
