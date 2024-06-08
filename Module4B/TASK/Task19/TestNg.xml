@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Test-Suite" >
+    <test verbose="2" preserve-order="true" name="/Users/reliancehmo/IdeaProjects/Selenium"></test>
+    <test name="Task 19 Test" >
+        <classes>
+            <class name="org.example.Task17.Homepage"/>
+            <class name="org.example.Task17.Elements"/>
+            <class name="org.example.Task18.Homepage"/>
+        </classes>
+    </test>
+
+</suite>
