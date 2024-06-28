@@ -7,6 +7,6 @@ print(my_var)
 number = 200
 print(number)
 
-# Declare a String variable with the value of your name
+# Declare a String variable with the value name
 myName = 'Ekene'
 print(myName)
