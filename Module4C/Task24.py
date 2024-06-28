@@ -1,3 +1,4 @@
+
 # Create an abstract class called Vehicle
 # Create an abstract method called drive_direction()
 # Create another class Car that inherits from Vehicle

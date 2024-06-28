@@ -1,3 +1,4 @@
+
 number = 2
 
 # Check if the variable is equal to 2

@@ -1,3 +1,4 @@
+
 # Create a class called User
 # Create a private attribute called __password with the value "password" in the User class
 # Create a method get_password() that returns self.__password in the User class

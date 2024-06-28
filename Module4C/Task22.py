@@ -1,3 +1,4 @@
+
 # Create a class called Hunt
 # Create a private attribute called __weapon with the value "Assault Rifle" in the Hunt class
 # Create a method get_weapon() that returns "Not Available" in the Hunt class
