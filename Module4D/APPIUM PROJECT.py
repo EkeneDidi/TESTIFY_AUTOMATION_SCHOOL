@@ -210,8 +210,6 @@ def main():
     if actual_result == expect_result:
         print("Thank you for your order")
     time.sleep(5)
-
-
     driver.quit()
 
 
